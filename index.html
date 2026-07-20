@@ -153,7 +153,7 @@ I AM.
         // Check command
         if (cleanValue === '14lettersforward') {
           playCorrectBuzz();
-          appendLine(`✔ [ MEMORY FOUND ] Redirecting...`, 'msg-success');
+          appendLine(`✔ [ MEMORY FOUND ]`, 'msg-success');
           
           // Opens cryptii Caesar cipher in a new tab
           window.open('https://cryptii.com/pipes/caesar-cipher/', '_blank');
@@ -179,65 +179,3 @@ I AM.
   </script>
 </body>
 </html>
-
-const input = document.getElementById('command-input');
-const log = document.getElementById('terminal-log');
-
-// Define your text responses and special actions here
-input.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    const rawValue = input.value;
-    const cleanValue = rawValue.trim().toLowerCase();
-
-    if (cleanValue === '') return;
-
-    // Echo what the user typed
-    appendLog(`> ${rawValue}`);
-
-    // --- EASTER EGGS & COMMANDS ---
-
-    // 1. External Links / Redirects
-    if (cleanValue === "rickastley" || cleanValue === "rickroll") {
-      appendLog("Redirecting to ultimate knowledge...");
-      setTimeout(() => {
-        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-      }, 1000); // Waits 1 second before redirecting
-    } 
-    
-    // 2. Play Audio in background (Optional funny effect)
-    else if (cleanValue === "laugh") {
-      appendLog("You hear faint laughing in the distance...");
-      let audio = new Audio("https://www.myinstants.com/media/sounds/evil-laugh.mp3");
-      audio.play();
-    }
-
-    // 3. Regular Text Lore & Funny Answers
-    else if (cleanValue === "help") {
-      appendLog("Help is not coming.");
-    } 
-    else if (cleanValue === "bill cipher") {
-      appendLog("Wrong website, kid.");
-    } 
-    else if (cleanValue === "who am i") {
-      appendLog("Just someone staring at a black screen.");
-    } 
-    
-    // Default fallback if they type nonsense
-    else {
-      appendLog(`No record found for "${rawValue}".`, 'response-error');
-    }
-
-    // Clear input and scroll to bottom
-    input.value = '';
-    log.scrollTop = log.scrollHeight;
-  }
-});
-
-function appendLog(text, className = '') {
-  const line = document.createElement('div');
-  line.textContent = text;
-  if (className) line.classList.add(className);
-  log.appendChild(line);
-}
-
-document.addEventListener('click', () => input.focus());
