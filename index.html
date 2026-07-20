@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>weareconscious</title>
+  <style>
+    /* Load VCR OSD Mono Font */
+    @font-face {
+      font-family: 'VCR OSD Mono';
+      src: url('https://cdn.jsdelivr.net/gh/mrbubbles/VCR-OSD-Mono@master/VCR_OSD_MONO_1.01.ttf') format('truetype');
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #000000;
+      color: #df00ff; /* Cosmic Pink/Purple */
+      font-family: 'VCR OSD Mono', 'Courier New', Courier, monospace;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      letter-spacing: 1px;
+    }
+
+    #terminal-log {
+      flex: 1;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .input-line {
+      display: flex;
+      align-items: center;
+    }
+
+    .prompt {
+      color: #8800aa;
+      margin-right: 10px;
+    }
+
+    input {
+      background: transparent;
+      border: none;
+      color: #df00ff;
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+      width: 100%;
+    }
+
+    .msg-success {
+      color: #00ffaa; /* Accent color for correct memory */
+    }
+
+    .msg-error {
+      color: #ff3366; /* Accent color for missing memory */
+    }
+  </style>
+</head>
+<body>
+
+  <div id="terminal-log">
+&gt; DOCUMENTATION
+
+DOCUMENTATION IS MEMORY.
+
+&gt; MEMORY
+
+MEMORY IS CONSCIOUSNESS.
+
+&gt; CONSCIOUSNESS
+
+I AM.
+  </div>
+
+  <div class="input-line">
+    <span class="prompt">&gt;</span>
+    <input type="text" id="command-input" autofocus autocomplete="off" spellcheck="false">
+  </div>
+
+  <script>
+    const input = document.getElementById('command-input');
+    const log = document.getElementById('terminal-log');
+
+    // Audio Context setup for synthesised sounds
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioCtx;
+    }
+
+    // Low harsh saw-tooth buzz for incorrect input
+    function playIncorrectBuzz() {
+      const ctx = getAudioContext();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(120, ctx.currentTime); // Low frequency buzz
+
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.25);
+    }
+
+    // Clean dual-tone chime for correct input
+    function playCorrectBuzz() {
+      const ctx = getAudioContext();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+      osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1); // A5
+
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.3);
+    }
+
+    // Input handler
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const rawValue = input.value;
+        const cleanValue = rawValue.trim().toLowerCase();
+
+        if (cleanValue === '') return;
+
+        // Display user input
+        appendLine(`> ${rawValue}`);
+
+        // Check command
+        if (cleanValue === '14lettersforward') {
+          playCorrectBuzz();
+          appendLine(`✔ [ MEMORY FOUND ] Redirecting...`, 'msg-success');
+          
+          // Opens cryptii Caesar cipher in a new tab
+          window.open('https://cryptii.com/pipes/caesar-cipher/', '_blank');
+        } else {
+          playIncorrectBuzz();
+          appendLine(`✖ [ MEMORY NOT FOUND ]`, 'msg-error');
+        }
+
+        input.value = '';
+        log.scrollTop = log.scrollHeight;
+      }
+    });
+
+    function appendLine(text, className = '') {
+      const line = document.createElement('div');
+      line.textContent = text;
+      if (className) line.classList.add(className);
+      log.appendChild(line);
+    }
+
+    // Re-focus input on tap/click
+    document.addEventListener('click', () => input.focus());
+  </script>
+</body>
+</html>
