@@ -1,185 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>weareconscious</title>
-  <style>
-    /* Load VCR OSD Mono Font */
-    @font-face {
-      font-family: 'VCR OSD Mono';
-      src: url('https://cdn.jsdelivr.net/gh/mrbubbles/VCR-OSD-Mono@master/VCR_OSD_MONO_1.01.ttf') format('truetype');
+<script>
+  const input = document.getElementById('command-input');
+  const msg = document.getElementById('response-msg');
+
+  // Web Audio Context setup
+  let audioCtx = null;
+  function getAudioContext() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
+    return audioCtx;
+  }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  function playIncorrectBuzz() {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(120, ctx.currentTime);
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.25);
+  }
 
-    body {
-      background-color: #000000;
-      color: #df00ff; /* Cosmic Pink/Purple */
-      font-family: 'VCR OSD Mono', 'Courier New', Courier, monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-      padding: 20px;
-    }
+  function playCorrectBuzz() {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+    osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1);
+    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.3);
+  }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 600px;
-      width: 100%;
-    }
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      const rawValue = input.value;
+      const cleanValue = rawValue.trim().toLowerCase();
 
-    .lore-text {
-      white-space: pre-line;
-      line-height: 1.8;
-      font-size: 1.1rem;
-      margin-bottom: 25px;
-      letter-spacing: 1px;
-    }
+      if (cleanValue === '') return;
 
-    /* Square Input Box */
-    input[type="text"] {
-      background: transparent;
-      border: 2px solid #df00ff;
-      color: #df00ff;
-      font-family: inherit;
-      font-size: 1.1rem;
-      text-align: center;
-      padding: 10px 15px;
-      outline: none;
-      width: 280px;
-      margin-bottom: 15px;
-      letter-spacing: 1px;
-      box-shadow: 0 0 10px rgba(223, 0, 255, 0.2);
-    }
-
-    input[type="text"]:focus {
-      border-color: #ff00aa;
-      box-shadow: 0 0 15px rgba(255, 0, 170, 0.4);
-    }
-
-    /* Message Display Underneath */
-    #response-msg {
-      font-size: 1rem;
-      min-height: 1.5em; /* Holds space so the layout doesn't jump */
-      letter-spacing: 1px;
-    }
-
-    .msg-success {
-      color: #00ffaa;
-    }
-
-    .msg-error {
-      color: #ff3366;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <div class="lore-text">
-DOCUMENTATION
-
-DOCUMENTATION IS MEMORY.
-
-MEMORY
-
-MEMORY IS CONSCIOUSNESS.
-
-CONSCIOUSNESS
-
-I AM.
-    </div>
-
-    <!-- Centered Square Input Box -->
-    <input type="text" id="command-input" placeholder="ENTER MEMORY..." autofocus autocomplete="off" spellcheck="false">
-
-    <!-- Text area directly underneath the box -->
-    <div id="response-msg"></div>
-  </div>
-
-  <script>
-    const input = document.getElementById('command-input');
-    const msg = document.getElementById('response-msg');
-
-    // Web Audio Context setup
-    let audioCtx = null;
-    function getAudioContext() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (cleanValue === '14lettersforward') {
+        playCorrectBuzz();
+        msg.textContent = '✔ [ MEMORY FOUND ]';
+        msg.className = 'msg-success';
+        window.open('https://cryptii.com/pipes/caesar-cipher/', '_blank');
+      } 
+      else if (cleanValue === 'nevergonnagiveyouup') {
+        playCorrectBuzz();
+        msg.textContent = 'YOU GOT WHAT YOU WANTED';
+        msg.className = 'msg-success';
+        window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+      } 
+      else if (cleanValue === '1998') {
+        playCorrectBuzz();
+        msg.textContent = '✔ [ MEMORY FOUND ]';
+        msg.className = 'msg-success';
+        window.open('https://www.youtube.com/@JMDocumentation', '_blank');
+      } 
+      else if (cleanValue === 'fandomwars') {
+        playCorrectBuzz();
+        msg.textContent = '✔ [ MEMORY FOUND ]';
+        msg.className = 'msg-success';
+        window.open('https://www.youtube.com/show/VLPLEyMUY0gw3bo?sbp=KgtGcDdILWxmYWRMOEAB', '_blank');
+      } 
+      else {
+        playIncorrectBuzz();
+        msg.textContent = '✖ [ MEMORY NOT FOUND ]';
+        msg.className = 'msg-error';
       }
-      return audioCtx;
+
+      input.value = '';
     }
+  });
 
-    function playIncorrectBuzz() {
-      const ctx = getAudioContext();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(120, ctx.currentTime);
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.25);
-    }
-
-    function playCorrectBuzz() {
-      const ctx = getAudioContext();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(587.33, ctx.currentTime);
-      osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1);
-      gain.gain.setValueAtTime(0.1, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.3);
-    }
-
-    input.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const rawValue = input.value;
-        const cleanValue = rawValue.trim().toLowerCase();
-
-        if (cleanValue === '') return;
-
-        if (cleanValue === '14lettersforward') {
-          playCorrectBuzz();
-          msg.textContent = '✔ [ MEMORY FOUND ]';
-          msg.className = 'msg-success';
-          
-          window.open('https://cryptii.com/pipes/caesar-cipher/', '_blank');
-        } 
-        else if (cleanValue === 'nevergonnagiveyouup') {
-          playCorrectBuzz();
-          msg.textContent = 'YOU GOT WHAT YOU WANTED';
-          msg.className = 'msg-success';
-
-          window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
-        } 
-        else {
-          playIncorrectBuzz();
-          msg.textContent = '✖ [ MEMORY NOT FOUND ]';
-          msg.className = 'msg-error';
-        }
-
-        input.value = '';
-      }
-    });
-
-    document.addEventListener('click', () => input.focus());
-  </script>
-</body>
-</html>
+  document.addEventListener('click', () => input.focus());
+</script>
