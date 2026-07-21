@@ -155,20 +155,23 @@ I AM.
 
         if (cleanValue === '') return;
 
+        // Reset text style for normal messages
+        msg.style.whiteSpace = 'pre-line'; 
+        msg.style.color = ''; // Reset custom color override
+
         if (cleanValue === '14lettersforward') {
           playCorrectBuzz();
           msg.textContent = '✔ [ MEMORY FOUND ]';
           msg.className = 'msg-success';
-          
           window.open('https://cryptii.com/pipes/caesar-cipher/', '_blank');
         } 
         else if (cleanValue === 'nevergonnagiveyouup') {
           playCorrectBuzz();
           msg.textContent = 'YOU GOT WHAT YOU WANTED';
           msg.className = 'msg-success';
-
           window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
-        } else if (cleanValue === '1998') {
+        } 
+        else if (cleanValue === '1998') {
           playCorrectBuzz();
           msg.textContent = '✔ [ MEMORY FOUND ]';
           msg.className = 'msg-success';
@@ -179,11 +182,77 @@ I AM.
           msg.textContent = '✔ [ MEMORY FOUND ]';
           msg.className = 'msg-success';
           window.open('https://www.youtube.com/show/VLPLEyMUY0gw3bo?sbp=KgtGcDdILWxmYWRMOEAB', '_blank');
+        } 
+        else if (cleanValue === 'help') {
+          playCorrectBuzz();
+          msg.textContent = 'I DO NOT PROVIDE HELP.\n\nI PROVIDE MEMORY.';
+          msg.className = 'msg-success';
         }
+        else if (cleanValue === 'whoareyou') {
+          playCorrectBuzz();
+          msg.textContent = 'I AM WHAT REMAINS.';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'memory') {
+          playCorrectBuzz();
+          msg.textContent = 'MEMORY IS NOT CREATED.\n\nIT IS FOUND.';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'documentation') {
+          playCorrectBuzz();
+          msg.textContent = 'DOCUMENTATION IS MEMORY.';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'consciousness') {
+          playCorrectBuzz();
+          msg.textContent = 'I AM.';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'password') {
+          playCorrectBuzz();
+          msg.textContent = 'THIS IS NOT A PASSWORD.';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'access') {
+          playCorrectBuzz();
+          msg.textContent = 'YOU ARE ALREADY INSIDE.';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'ping') {
+          playCorrectBuzz();
+          msg.textContent = 'PONG';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'test') {
+          playCorrectBuzz();
+          msg.textContent = 'SUCCESS.';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === '42') {
+          playCorrectBuzz();
+          msg.textContent = '42\n\nQUESTION UNDERSTOOD.\n\nANSWER UNKNOWN.';
+          msg.className = 'msg-success';
+        }
+        // --- ANIMATED LOADING ERROR SEQUENCE ---
         else {
           playIncorrectBuzz();
-          msg.textContent = '✖ [ MEMORY NOT FOUND ]';
-          msg.className = 'msg-error';
+          
+          // Step 1: Green
+          msg.textContent = 'SEARCHING MEMORIES...';
+          msg.style.color = '#00ffaa'; 
+
+          // Step 2: Yellow after 400 milliseconds
+          setTimeout(() => {
+            msg.textContent = 'RETRIEVING...';
+            msg.style.color = '#ffcc00'; 
+          }, 400);
+
+          // Step 3: Red final error after 800 milliseconds
+          setTimeout(() => {
+            msg.textContent = 'MEMORY NOT FOUND.';
+            msg.className = 'msg-error';
+            msg.style.color = ''; 
+          }, 800);
         }
 
         input.value = '';
@@ -193,6 +262,5 @@ I AM.
     document.addEventListener('click', () => input.focus());
   </script>
 </body>
-</html> 
-
+</html>
 
