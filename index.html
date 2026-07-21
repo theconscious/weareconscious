@@ -249,10 +249,59 @@ I AM.
             window.open('https://cryptii.com/pipes/vigenere-cipher/', '_blank');
           }, 600);
         }
+        // --- SOULARIA ---
+        else if (cleanValue === 'soularia') {
+          msg.textContent = 'SEARCHING MEMORIES...';
+          msg.style.color = '#00ffaa';
+          setTimeout(() => { msg.textContent = 'RETRIEVING...'; msg.style.color = '#ffcc00'; }, 300);
+          setTimeout(() => {
+            playCorrectBuzz();
+            msg.textContent = '✔ [ MEMORY FOUND ]';
+            msg.className = 'msg-success';
+            msg.style.color = '';
+            window.open('https://www.youtube.com/@SoulariaOfficial/', '_blank');
+          }, 600);
+        }
         // --- FANDOMWARS3 ---
         else if (cleanValue === 'fandomwars3') {
           playCorrectBuzz();
           msg.textContent = "THIRD TIME'S THE CHARM.";
+          msg.className = 'msg-success';
+        }
+        // --- NEW LORE COMMANDS ---
+        else if (cleanValue === 'clonesoularia') {
+          playCorrectBuzz();
+          msg.textContent = 'STILL WAITING.';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'avp') {
+          playCorrectBuzz();
+          msg.textContent = 'PROTOCOL RECOGNIZED.\n\nALTERNATE VERSION PROTOCOL';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'subsidence') {
+          playCorrectBuzz();
+          msg.textContent = 'THE MIND COLLAPSES, THE BODY STILL REMAINS.';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'jordan') {
+          playCorrectBuzz();
+          msg.textContent = '8-15-16-5';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'maxwell') {
+          playCorrectBuzz();
+          msg.textContent = '23-9-19-5';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'jm') {
+          playCorrectBuzz();
+          msg.textContent = 'THEY DOCUMENTED.';
+          msg.className = 'msg-success';
+        }
+        else if (cleanValue === 'theconscious') {
+          playCorrectBuzz();
+          msg.textContent = 'SOMETIMES, THE BEST KNOWLEDGE IS NOT KNOWING.';
           msg.className = 'msg-success';
         }
         // --- TEXT RESPONSES ---
@@ -351,4 +400,3 @@ I AM.
   </script>
 </body>
 </html>
-
