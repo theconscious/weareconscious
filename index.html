@@ -306,6 +306,24 @@ I AM.
           msg.textContent = '42\n\nQUESTION UNDERSTOOD.\n\nANSWER UNKNOWN.';
           msg.className = 'msg-success';
         }
+        // --- BRAINROT / EXISTENCE ERASURE EASTER EGG ---
+        else if (cleanValue === '67' || cleanValue === 'brainrot' || cleanValue === 'sixseven' || cleanValue === 'six7' || cleanValue === '6seven' || cleanValue === 'tungtungtungsahur' || cleanValue === 'italianbrainrot' || cleanValue === 'skibidi' || cleanValue === 'rizz' || cleanValue === 'ohio' || cleanValue === 'gyatt') {
+          playCorrectBuzz();
+          msg.textContent = 'LIFE SUBSCRIPTION STATUS: EXPIRED\n\nINITIATE EXISTENCE ERASURE PROTOCOL.';
+          msg.className = 'msg-success';
+        }
+        // --- ENTER MEMORY ---
+        else if (cleanValue === 'entermemory') {
+          playCorrectBuzz();
+          msg.textContent = 'YOU JUST ENTERED ONE.';
+          msg.className = 'msg-success';
+        }
+        // --- MEMORYSCAPE (MORSE CODE) ---
+        else if (cleanValue === 'memoryscape') {
+          playCorrectBuzz();
+          msg.textContent = '.. - / .-. . -- . -- -... . .-. ...';
+          msg.className = 'msg-success';
+        }
         // --- ANIMATED LOADING ERROR SEQUENCE ---
         else {
           playIncorrectBuzz();
