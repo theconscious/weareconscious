@@ -155,34 +155,107 @@ I AM.
 
         if (cleanValue === '') return;
 
-        // Reset text style for normal messages
         msg.style.whiteSpace = 'pre-line'; 
-        msg.style.color = ''; // Reset custom color override
+        msg.style.color = ''; 
 
+        // --- 14 LETTERS FORWARD ---
         if (cleanValue === '14lettersforward') {
-          playCorrectBuzz();
-          msg.textContent = '✔ [ MEMORY FOUND ]';
-          msg.className = 'msg-success';
-          window.open('https://cryptii.com/pipes/caesar-cipher/', '_blank');
+          msg.textContent = 'SEARCHING MEMORIES...';
+          msg.style.color = '#00ffaa';
+          setTimeout(() => { msg.textContent = 'RETRIEVING...'; msg.style.color = '#ffcc00'; }, 300);
+          setTimeout(() => {
+            playCorrectBuzz();
+            msg.textContent = '✔ [ MEMORY FOUND ]';
+            msg.className = 'msg-success';
+            msg.style.color = '';
+            window.open('https://cryptii.com/pipes/caesar-cipher/', '_blank');
+          }, 600);
         } 
+        // --- NEVER GONNA GIVE YOU UP ---
         else if (cleanValue === 'nevergonnagiveyouup') {
-          playCorrectBuzz();
-          msg.textContent = 'YOU GOT WHAT YOU WANTED';
-          msg.className = 'msg-success';
-          window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+          msg.textContent = 'SEARCHING MEMORIES...';
+          msg.style.color = '#00ffaa';
+          setTimeout(() => { msg.textContent = 'RETRIEVING...'; msg.style.color = '#ffcc00'; }, 300);
+          setTimeout(() => {
+            playCorrectBuzz();
+            msg.textContent = 'YOU GOT WHAT YOU WANTED';
+            msg.className = 'msg-success';
+            msg.style.color = '';
+            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+          }, 600);
         } 
+        // --- 1998 ---
         else if (cleanValue === '1998') {
-          playCorrectBuzz();
-          msg.textContent = '✔ [ MEMORY FOUND ]';
-          msg.className = 'msg-success';
-          window.open('https://www.youtube.com/@JMDocumentation', '_blank');
+          msg.textContent = 'SEARCHING MEMORIES...';
+          msg.style.color = '#00ffaa';
+          setTimeout(() => { msg.textContent = 'RETRIEVING...'; msg.style.color = '#ffcc00'; }, 300);
+          setTimeout(() => {
+            playCorrectBuzz();
+            msg.textContent = '✔ [ MEMORY FOUND ]';
+            msg.className = 'msg-success';
+            msg.style.color = '';
+            window.open('https://www.youtube.com/@JMDocumentation', '_blank');
+          }, 600);
         } 
+        // --- FANDOMWARS ---
         else if (cleanValue === 'fandomwars') {
+          msg.textContent = 'SEARCHING MEMORIES...';
+          msg.style.color = '#00ffaa';
+          setTimeout(() => { msg.textContent = 'RETRIEVING...'; msg.style.color = '#ffcc00'; }, 300);
+          setTimeout(() => {
+            playCorrectBuzz();
+            msg.textContent = '✔ [ MEMORY FOUND ]';
+            msg.className = 'msg-success';
+            msg.style.color = '';
+            window.open('https://www.youtube.com/show/VLPLEyMUY0gw3bo?sbp=KgtGcDdILWxmYWRMOEAB', '_blank');
+          }, 600);
+        }
+        // --- SWAPAWITHZ (Atbash Cipher) ---
+        else if (cleanValue === 'swapawithz') {
+          msg.textContent = 'SEARCHING MEMORIES...';
+          msg.style.color = '#00ffaa';
+          setTimeout(() => { msg.textContent = 'RETRIEVING...'; msg.style.color = '#ffcc00'; }, 300);
+          setTimeout(() => {
+            playCorrectBuzz();
+            msg.textContent = '✔ [ MEMORY FOUND ]';
+            msg.className = 'msg-success';
+            msg.style.color = '';
+            window.open('https://cryptii.com/pipes/atbash-cipher/', '_blank');
+          }, 600);
+        }
+        // --- LETTERSTONUMBERS (A1Z26 Cipher) ---
+        else if (cleanValue === 'letterstonumbers') {
+          msg.textContent = 'SEARCHING MEMORIES...';
+          msg.style.color = '#00ffaa';
+          setTimeout(() => { msg.textContent = 'RETRIEVING...'; msg.style.color = '#ffcc00'; }, 300);
+          setTimeout(() => {
+            playCorrectBuzz();
+            msg.textContent = '✔ [ MEMORY FOUND ]';
+            msg.className = 'msg-success';
+            msg.style.color = '';
+            window.open('https://cryptii.com/pipes/a1z26-cipher/', '_blank');
+          }, 600);
+        }
+        // --- VIGENERE ---
+        else if (cleanValue === 'vigenere') {
+          msg.textContent = 'SEARCHING MEMORIES...';
+          msg.style.color = '#00ffaa';
+          setTimeout(() => { msg.textContent = 'RETRIEVING...'; msg.style.color = '#ffcc00'; }, 300);
+          setTimeout(() => {
+            playCorrectBuzz();
+            msg.textContent = '✔ [ MEMORY FOUND ]';
+            msg.className = 'msg-success';
+            msg.style.color = '';
+            window.open('https://cryptii.com/pipes/vigenere-cipher/', '_blank');
+          }, 600);
+        }
+        // --- FANDOMWARS3 ---
+        else if (cleanValue === 'fandomwars3') {
           playCorrectBuzz();
-          msg.textContent = '✔ [ MEMORY FOUND ]';
+          msg.textContent = "THIRD TIME'S THE CHARM.";
           msg.className = 'msg-success';
-          window.open('https://www.youtube.com/show/VLPLEyMUY0gw3bo?sbp=KgtGcDdILWxmYWRMOEAB', '_blank');
-        } 
+        }
+        // --- TEXT RESPONSES ---
         else if (cleanValue === 'help') {
           playCorrectBuzz();
           msg.textContent = 'I DO NOT PROVIDE HELP.\n\nI PROVIDE MEMORY.';
@@ -237,17 +310,14 @@ I AM.
         else {
           playIncorrectBuzz();
           
-          // Step 1: Green
           msg.textContent = 'SEARCHING MEMORIES...';
           msg.style.color = '#00ffaa'; 
 
-          // Step 2: Yellow after 400 milliseconds
           setTimeout(() => {
             msg.textContent = 'RETRIEVING...';
             msg.style.color = '#ffcc00'; 
           }, 400);
 
-          // Step 3: Red final error after 800 milliseconds
           setTimeout(() => {
             msg.textContent = 'MEMORY NOT FOUND.';
             msg.className = 'msg-error';
